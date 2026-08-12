@@ -3,14 +3,13 @@ import WidgetKit
 
 enum CounterIntentSupport {
     static func apply(_ mutate: (LocalCounterManager) -> CounterData) {
-        #if canImport(FirebaseCore)
-        FirebaseBootstrap.configureIfPossible()
-        #endif
-
         let manager = LocalCounterManager()
         let updated = mutate(manager)
 
-        #if canImport(FirebaseFirestore)
+        // Firebase sync is app-only — the widget target defines JOBCOUNTER_WIDGET and
+        // does not compile FirestoreSyncService / FirebaseBootstrap.
+        #if !JOBCOUNTER_WIDGET
+        FirebaseBootstrap.configureIfPossible()
         FirestoreSyncService(localManager: manager)
             .pushCountsToCloud(myCount: updated.myCount, partnerCount: updated.partnerCount)
         #endif

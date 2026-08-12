@@ -39,6 +39,9 @@ struct ContentView: View {
         .padding(32)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
+            if !AppGroup.isAvailable {
+                print("Warning: App Group not available — counts use standard defaults until Signing registers group.com.roshantaneja.jobcounter")
+            }
             counter = manager.data
             syncService.listenForCloudUpdates()
         }

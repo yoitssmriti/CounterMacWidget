@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,7 @@
 		8BFB3594D53472C0612B8A1D /* LocalCounterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0197B337FCD40D461EF47058 /* LocalCounterManager.swift */; };
 		9EAB90FF22985FAA4A038B10 /* JobCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377D427641B94A8190A7763E /* JobCounterApp.swift */; };
 		A489E559F8B610536D22901A /* JobCounterWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A89DA5EE9710A2CD3F301FF7 /* JobCounterWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B2A1C4E87F0D4A1B9C3E5F60 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* GoogleService-Info.plist */; };
 		CBFC0086D273DBF06FC7A09A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC5FE7D827EE307A8FE7291 /* ContentView.swift */; };
 		E0652657A8D704E8DB197638 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B6DD046743CF40CB730EE66 /* AppGroup.swift */; };
 		F0C314383FC78B5E887840C2 /* JobCounterWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7517721C128BA37B8AA3196 /* JobCounterWidgetBundle.swift */; };
@@ -63,6 +64,7 @@
 		6E103980C2392CF7C76725E3 /* JobCounter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JobCounter.entitlements; sourceTree = "<group>"; };
 		7B9117AD54EA8175DA5B0FE6 /* FirestoreSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreSyncService.swift; sourceTree = "<group>"; };
 		8CA61F98645880E2B8EC1D9F /* JobCounterTimelineProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCounterTimelineProvider.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B5C /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A89DA5EE9710A2CD3F301FF7 /* JobCounterWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = JobCounterWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7CE77AF7704DE9958F82E39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7517721C128BA37B8AA3196 /* JobCounterWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobCounterWidgetBundle.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				63C636F29A0B87D3580C2DEC /* JobCounter */,
 				312CA53049B588F5A26BA170 /* JobCounterWidget */,
 				A4065AC76AC3CAB63CACF495 /* Products */,
+				A1B2C3D4E5F60718293A4B5C /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -140,6 +143,7 @@
 			buildPhases = (
 				CEAD722279CD86F7DC6956D4 /* Sources */,
 				35E1A0953D945962A9D29722 /* Frameworks */,
+				C0FFEE11DEADBEEFCAFEBABE /* Resources */,
 				42F9A6CF79BDB74C80818D0A /* Embed Foundation Extensions */,
 			);
 			buildRules = (
@@ -183,11 +187,9 @@
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					D9EE95953FB12A1585F6ACA8 = {
-						DevelopmentTeam = UBH45H647L;
 						ProvisioningStyle = Automatic;
 					};
 					FF0AA9183A31974A3A4A199A = {
-						DevelopmentTeam = UBH45H647L;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -205,7 +207,6 @@
 			packageReferences = (
 				D39DD6620B2A32ECC415BEF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -214,6 +215,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C0FFEE11DEADBEEFCAFEBABE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2A1C4E87F0D4A1B9C3E5F60 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BEC943EEEF26D5D1B410DB23 /* Sources */ = {
@@ -294,7 +306,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = UBH45H647L;
+				DEVELOPMENT_TEAM = M385RN2SR8;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -363,7 +375,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = UBH45H647L;
+				DEVELOPMENT_TEAM = M385RN2SR8;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -390,8 +402,23 @@
 		4C6C3398343E13E036278764 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				AUTOMATION_APPLE_EVENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = JobCounterWidget/JobCounterWidget.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M385RN2SR8;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JobCounterWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Job Counter";
@@ -401,10 +428,18 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jobcounter.app.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roshantaneja.jobcounter.widget;
 				PRODUCT_NAME = JobCounterWidget;
+				REGISTER_APP_GROUPS = YES;
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) JOBCOUNTER_WIDGET";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Debug;
@@ -415,7 +450,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = JobCounter/JobCounter.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M385RN2SR8;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Job Counter";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -425,8 +472,9 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jobcounter.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roshantaneja.jobcounter;
 				PRODUCT_NAME = JobCounter;
+				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -438,7 +486,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = JobCounter/JobCounter.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M385RN2SR8;
+				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Job Counter";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
@@ -448,8 +508,9 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jobcounter.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roshantaneja.jobcounter;
 				PRODUCT_NAME = JobCounter;
+				REGISTER_APP_GROUPS = YES;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -458,8 +519,23 @@
 		F466E893655B475FAA54B9BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				AUTOMATION_APPLE_EVENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = JobCounterWidget/JobCounterWidget.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = M385RN2SR8;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = JobCounterWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Job Counter";
@@ -469,10 +545,18 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jobcounter.app.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.roshantaneja.jobcounter.widget;
 				PRODUCT_NAME = JobCounterWidget;
+				REGISTER_APP_GROUPS = YES;
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) JOBCOUNTER_WIDGET";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;

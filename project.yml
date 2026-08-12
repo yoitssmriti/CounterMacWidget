@@ -1,6 +1,6 @@
 name: JobCounter
 options:
-  bundleIdPrefix: com.jobcounter
+  bundleIdPrefix: com.roshantaneja.jobcounter
   deploymentTarget:
     macOS: "14.0"
   createIntermediateGroups: true
@@ -12,7 +12,7 @@ settings:
     SWIFT_VERSION: "5.0"
     MACOSX_DEPLOYMENT_TARGET: "14.0"
     CODE_SIGN_STYLE: Automatic
-    DEVELOPMENT_TEAM: "UBH45H647L"
+    DEVELOPMENT_TEAM: "M385RN2SR8"
     CURRENT_PROJECT_VERSION: "1"
     MARKETING_VERSION: "1.0"
     ENABLE_USER_SCRIPT_SANDBOXING: YES
@@ -31,9 +31,11 @@ targets:
       - path: JobCounter
         excludes:
           - "**/.DS_Store"
+      - path: GoogleService-Info.plist
+        buildPhase: resources
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.jobcounter.app
+        PRODUCT_BUNDLE_IDENTIFIER: com.roshantaneja.jobcounter
         PRODUCT_NAME: JobCounter
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: Job Counter
@@ -43,6 +45,7 @@ targets:
         COMBINE_HIDPI_IMAGES: YES
         ENABLE_HARDENED_RUNTIME: YES
         CODE_SIGN_ENTITLEMENTS: JobCounter/JobCounter.entitlements
+        REGISTER_APP_GROUPS: YES
         LD_RUNPATH_SEARCH_PATHS:
           - "$(inherited)"
           - "@executable_path/../Frameworks"
@@ -54,7 +57,7 @@ targets:
         com.apple.security.files.user-selected.read-only: true
         com.apple.security.network.client: true
         com.apple.security.application-groups:
-          - group.com.jobcounter.app
+          - group.com.roshantaneja.jobcounter
     dependencies:
       - package: firebase-ios-sdk
         product: FirebaseCore
@@ -79,18 +82,20 @@ targets:
           - CounterIntents.swift
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.jobcounter.app.widget
+        PRODUCT_BUNDLE_IDENTIFIER: com.roshantaneja.jobcounter.widget
         PRODUCT_NAME: JobCounterWidget
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_FILE: JobCounterWidget/Info.plist
         INFOPLIST_KEY_CFBundleDisplayName: Job Counter
         INFOPLIST_KEY_NSHumanReadableCopyright: ""
         CODE_SIGN_ENTITLEMENTS: JobCounterWidget/JobCounterWidget.entitlements
+        REGISTER_APP_GROUPS: YES
         LD_RUNPATH_SEARCH_PATHS:
           - "$(inherited)"
           - "@executable_path/../Frameworks"
           - "@executable_path/../../../../Frameworks"
         SKIP_INSTALL: YES
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: "$(inherited) JOBCOUNTER_WIDGET"
         SWIFT_EMIT_LOC_STRINGS: YES
     entitlements:
       path: JobCounterWidget/JobCounterWidget.entitlements
@@ -98,7 +103,7 @@ targets:
         com.apple.security.app-sandbox: true
         com.apple.security.network.client: true
         com.apple.security.application-groups:
-          - group.com.jobcounter.app
+          - group.com.roshantaneja.jobcounter
     # Keep the widget lean — Firebase in the appex bloats it (~20MB) and often
     # knocks it out of the macOS widget gallery. Cloud sync runs from the app.
     dependencies: []

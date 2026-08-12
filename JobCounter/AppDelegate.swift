@@ -2,7 +2,7 @@ import AppKit
 import FirebaseCore
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
-    private let syncService = FirestoreSyncService()
+    private lazy var syncService = FirestoreSyncService()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         if FirebaseBootstrap.configureIfPossible() {

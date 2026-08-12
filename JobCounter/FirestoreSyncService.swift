@@ -11,6 +11,8 @@ final class FirestoreSyncService {
 
     private var competitionDocument: DocumentReference? {
         guard FirebaseApp.app() != nil else { return nil }
+        // Ensure memory-cache settings are applied before the first Firestore use.
+        _ = FirebaseBootstrap.configureIfPossible()
         return Firestore.firestore().collection("counters").document("competition")
     }
 
@@ -37,6 +39,8 @@ final class FirestoreSyncService {
         competitionDocument.setData(payload, merge: true) { error in
             if let error {
                 print("Firestore push failed: \(error.localizedDescription)")
+            } else {
+                print("Firestore push ok: my=\(myCount) partner=\(partnerCount)")
             }
         }
     }
@@ -50,38 +54,63 @@ final class FirestoreSyncService {
             return
         }
 
+        print("Firestore listener attaching to counters/competition")
+
         listener = competitionDocument.addSnapshotListener { [weak self] snapshot, error in
-            guard let self else { return }
-
-            if let error {
-                print("Firestore listener error: \(error.localizedDescription)")
-                return
-            }
-
-            guard let data = snapshot?.data() else { return }
-
-            let myCount = data["myCount"] as? Int ?? 0
-            let partnerCount = data["partnerCount"] as? Int ?? 0
-            let updated = CounterData(myCount: myCount, partnerCount: partnerCount)
-
-            // Skip redundant writes when the local store already matches.
-            guard updated != self.localManager.data else { return }
-
-            self.localManager.data = updated
-
-            // Refresh desktop widgets when partner (or remote) data changes.
-            WidgetCenter.shared.reloadAllTimelines()
-
-            NotificationCenter.default.post(
-                name: Self.didUpdateNotification,
-                object: self,
-                userInfo: ["counterData": updated]
-            )
+            self?.applyRemoteSnapshot(snapshot, error: error)
         }
     }
 
     func stopListening() {
         listener?.remove()
         listener = nil
+    }
+
+    private func applyRemoteSnapshot(_ snapshot: DocumentSnapshot?, error: Error?) {
+        if let error {
+            print("Firestore listener error: \(error.localizedDescription)")
+            return
+        }
+
+        guard let snapshot else { return }
+
+        guard snapshot.exists, let data = snapshot.data() else {
+            print("Firestore counters/competition is missing — create it in the Firebase console.")
+            return
+        }
+
+        let myCount = Self.intValue(data["myCount"])
+        let partnerCount = Self.intValue(data["partnerCount"])
+        let updated = CounterData(myCount: myCount, partnerCount: partnerCount)
+
+        print("Firestore snapshot: my=\(myCount) partner=\(partnerCount) (raw my=\(String(describing: data["myCount"])) partner=\(String(describing: data["partnerCount"])))")
+
+        // Always publish so the UI refreshes even when local already matched a failed earlier read.
+        localManager.data = updated
+        WidgetCenter.shared.reloadAllTimelines()
+
+        NotificationCenter.default.post(
+            name: Self.didUpdateNotification,
+            object: self,
+            userInfo: ["counterData": updated]
+        )
+    }
+
+    /// Firestore may box numbers as Int, Int64, Double, or NSNumber — `as? Int` alone often fails.
+    private static func intValue(_ raw: Any?) -> Int {
+        switch raw {
+        case let value as Int:
+            return value
+        case let value as Int64:
+            return Int(value)
+        case let value as Double:
+            return Int(value)
+        case let value as Float:
+            return Int(value)
+        case let value as NSNumber:
+            return value.intValue
+        default:
+            return 0
+        }
     }
 }
