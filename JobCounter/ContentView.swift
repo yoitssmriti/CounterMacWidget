@@ -15,23 +15,23 @@ struct ContentView: View {
             HStack(spacing: 20) {
                 counterCard(
                     title: "Smriti's Applications",
-                    count: counter.myCount,
+                    count: counter.smriti,
                     onDecrement: {
-                        counter = apply { $0.decrementMyCount() }
+                        counter = apply { $0.decrementSmriti() }
                     },
                     onIncrement: {
-                        counter = apply { $0.incrementMyCount() }
+                        counter = apply { $0.incrementSmriti() }
                     }
                 )
 
                 counterCard(
                     title: "Roshan's Applications",
-                    count: counter.partnerCount,
+                    count: counter.roshan,
                     onDecrement: {
-                        counter = apply { $0.decrementPartnerCount() }
+                        counter = apply { $0.decrementRoshan() }
                     },
                     onIncrement: {
-                        counter = apply { $0.incrementPartnerCount() }
+                        counter = apply { $0.incrementRoshan() }
                     }
                 )
             }
@@ -40,7 +40,7 @@ struct ContentView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .onAppear {
             if !AppGroup.isAvailable {
-                print("Warning: App Group not available — counts use standard defaults until Signing registers group.com.roshantaneja.jobcounter")
+                print("Warning: App Group not available — counts use standard defaults until Signing registers \(AppGroup.suiteName)")
             }
             counter = manager.data
             syncService.listenForCloudUpdates()
@@ -56,7 +56,7 @@ struct ContentView: View {
 
     private func apply(_ mutate: (LocalCounterManager) -> CounterData) -> CounterData {
         let updated = mutate(manager)
-        syncService.pushCountsToCloud(myCount: updated.myCount, partnerCount: updated.partnerCount)
+        syncService.pushCountsToCloud(updated)
         return updated
     }
 

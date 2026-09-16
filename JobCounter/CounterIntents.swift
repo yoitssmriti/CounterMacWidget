@@ -11,49 +11,49 @@ enum CounterIntentSupport {
         #if !JOBCOUNTER_WIDGET
         FirebaseBootstrap.configureIfPossible()
         FirestoreSyncService(localManager: manager)
-            .pushCountsToCloud(myCount: updated.myCount, partnerCount: updated.partnerCount)
+            .pushCountsToCloud(updated)
         #endif
 
         WidgetCenter.shared.reloadAllTimelines()
     }
 }
 
-struct IncrementMyCountIntent: AppIntent {
-    static var title: LocalizedStringResource = "Increment My Count"
-    static var description = IntentDescription("Adds one to My Applications.")
+struct IncrementSmritiIntent: AppIntent {
+    static var title: LocalizedStringResource = "Increment Smriti's Count"
+    static var description = IntentDescription("Adds one to Smriti's Applications.")
 
     func perform() async throws -> some IntentResult {
-        CounterIntentSupport.apply { $0.incrementMyCount() }
+        CounterIntentSupport.apply { $0.incrementSmriti() }
         return .result()
     }
 }
 
-struct DecrementMyCountIntent: AppIntent {
-    static var title: LocalizedStringResource = "Decrement My Count"
-    static var description = IntentDescription("Subtracts one from My Applications.")
+struct DecrementSmritiIntent: AppIntent {
+    static var title: LocalizedStringResource = "Decrement Smriti's Count"
+    static var description = IntentDescription("Subtracts one from Smriti's Applications.")
 
     func perform() async throws -> some IntentResult {
-        CounterIntentSupport.apply { $0.decrementMyCount() }
+        CounterIntentSupport.apply { $0.decrementSmriti() }
         return .result()
     }
 }
 
-struct IncrementPartnerCountIntent: AppIntent {
-    static var title: LocalizedStringResource = "Increment Partner Count"
-    static var description = IntentDescription("Adds one to His Applications.")
+struct IncrementRoshanIntent: AppIntent {
+    static var title: LocalizedStringResource = "Increment Roshan's Count"
+    static var description = IntentDescription("Adds one to Roshan's Applications.")
 
     func perform() async throws -> some IntentResult {
-        CounterIntentSupport.apply { $0.incrementPartnerCount() }
+        CounterIntentSupport.apply { $0.incrementRoshan() }
         return .result()
     }
 }
 
-struct DecrementPartnerCountIntent: AppIntent {
-    static var title: LocalizedStringResource = "Decrement Partner Count"
-    static var description = IntentDescription("Subtracts one from His Applications.")
+struct DecrementRoshanIntent: AppIntent {
+    static var title: LocalizedStringResource = "Decrement Roshan's Count"
+    static var description = IntentDescription("Subtracts one from Roshan's Applications.")
 
     func perform() async throws -> some IntentResult {
-        CounterIntentSupport.apply { $0.decrementPartnerCount() }
+        CounterIntentSupport.apply { $0.decrementRoshan() }
         return .result()
     }
 }

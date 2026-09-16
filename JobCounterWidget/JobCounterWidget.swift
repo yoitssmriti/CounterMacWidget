@@ -17,5 +17,5 @@ struct JobCounterWidget: Widget {
 #Preview(as: .systemMedium) {
     JobCounterWidget()
 } timeline: {
-    SimpleEntry(date: .now, myCount: 12, partnerCount: 9)
+    SimpleEntry(date: .now, smriti: 12, roshan: 9)
 }

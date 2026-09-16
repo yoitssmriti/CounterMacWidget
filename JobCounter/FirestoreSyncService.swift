@@ -25,22 +25,22 @@ final class FirestoreSyncService {
     }
 
     /// Writes both counts to `counters/competition`.
-    func pushCountsToCloud(myCount: Int, partnerCount: Int) {
+    func pushCountsToCloud(_ counts: CounterData) {
         guard let competitionDocument else {
             print("Firestore push skipped: Firebase is not configured.")
             return
         }
 
         let payload: [String: Any] = [
-            "myCount": myCount,
-            "partnerCount": partnerCount,
+            "smriti": counts.smriti,
+            "roshan": counts.roshan,
         ]
 
         competitionDocument.setData(payload, merge: true) { error in
             if let error {
                 print("Firestore push failed: \(error.localizedDescription)")
             } else {
-                print("Firestore push ok: my=\(myCount) partner=\(partnerCount)")
+                print("Firestore push ok: smriti=\(counts.smriti) roshan=\(counts.roshan)")
             }
         }
     }
@@ -79,11 +79,12 @@ final class FirestoreSyncService {
             return
         }
 
-        let myCount = Self.intValue(data["myCount"])
-        let partnerCount = Self.intValue(data["partnerCount"])
-        let updated = CounterData(myCount: myCount, partnerCount: partnerCount)
+        // Fall back to the legacy myCount/partnerCount fields so counts survive the rename.
+        let smriti = Self.intValue(data["smriti"] ?? data["myCount"])
+        let roshan = Self.intValue(data["roshan"] ?? data["partnerCount"])
+        let updated = CounterData(smriti: smriti, roshan: roshan)
 
-        print("Firestore snapshot: my=\(myCount) partner=\(partnerCount) (raw my=\(String(describing: data["myCount"])) partner=\(String(describing: data["partnerCount"])))")
+        print("Firestore snapshot: smriti=\(smriti) roshan=\(roshan)")
 
         // Always publish so the UI refreshes even when local already matched a failed earlier read.
         localManager.data = updated

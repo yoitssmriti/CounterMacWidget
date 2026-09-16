@@ -2,19 +2,19 @@ import WidgetKit
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let myCount: Int
-    let partnerCount: Int
+    let smriti: Int
+    let roshan: Int
 
     init(date: Date = Date(), data: CounterData) {
         self.date = date
-        self.myCount = data.myCount
-        self.partnerCount = data.partnerCount
+        self.smriti = data.smriti
+        self.roshan = data.roshan
     }
 
-    init(date: Date, myCount: Int, partnerCount: Int) {
+    init(date: Date, smriti: Int, roshan: Int) {
         self.date = date
-        self.myCount = myCount
-        self.partnerCount = partnerCount
+        self.smriti = smriti
+        self.roshan = roshan
     }
 }
 

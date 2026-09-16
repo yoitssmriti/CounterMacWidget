@@ -57,7 +57,7 @@ targets:
         com.apple.security.files.user-selected.read-only: true
         com.apple.security.network.client: true
         com.apple.security.application-groups:
-          - group.com.roshantaneja.jobcounter
+          - group.com.jobcounter.app
     dependencies:
       - package: firebase-ios-sdk
         product: FirebaseCore
@@ -103,7 +103,7 @@ targets:
         com.apple.security.app-sandbox: true
         com.apple.security.network.client: true
         com.apple.security.application-groups:
-          - group.com.roshantaneja.jobcounter
+          - group.com.jobcounter.app
     # Keep the widget lean — Firebase in the appex bloats it (~20MB) and often
     # knocks it out of the macOS widget gallery. Cloud sync runs from the app.
     dependencies: []

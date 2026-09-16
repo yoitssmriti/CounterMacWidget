@@ -14,8 +14,8 @@ Set up a shared database so application counts sync across both Macs in real tim
 3. Under **Build**, select **Firestore Database** and click **Create Database**.
 4. Choose **Start in test mode** so read/write rules are open during setup.
 5. In Firestore, create a collection named `counters` with a single document ID `competition`:
-   * Field: `myCount` (Number) = `0`
-   * Field: `partnerCount` (Number) = `0`
+   * Field: `smriti` (Number) = `0`
+   * Field: `roshan` (Number) = `0`
 6. Click the gear icon next to **Project Overview** → **Project settings**.
 7. Under *Your apps*, click the **iOS/macOS** icon to register an app (Bundle ID e.g., `com.yourname.JobCounter`).
 8. Download the `GoogleService-Info.plist` file and keep it ready for Xcode.

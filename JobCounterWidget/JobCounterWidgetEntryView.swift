@@ -9,16 +9,16 @@ struct JobCounterWidgetEntryView: View {
         HStack(spacing: 12) {
             countColumn(
                 title: "Smriti's Applications",
-                count: entry.myCount,
-                decrementIntent: DecrementMyCountIntent(),
-                incrementIntent: IncrementMyCountIntent()
+                count: entry.smriti,
+                decrementIntent: DecrementSmritiIntent(),
+                incrementIntent: IncrementSmritiIntent()
             )
 
             countColumn(
                 title: "Roshan's Applications",
-                count: entry.partnerCount,
-                decrementIntent: DecrementPartnerCountIntent(),
-                incrementIntent: IncrementPartnerCountIntent()
+                count: entry.roshan,
+                decrementIntent: DecrementRoshanIntent(),
+                incrementIntent: IncrementRoshanIntent()
             )
         }
         .padding(12)

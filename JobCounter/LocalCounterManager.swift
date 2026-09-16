@@ -1,10 +1,37 @@
 import Foundation
 
 struct CounterData: Codable, Equatable {
-    var myCount: Int
-    var partnerCount: Int
+    var smriti: Int
+    var roshan: Int
 
-    static let zero = CounterData(myCount: 0, partnerCount: 0)
+    static let zero = CounterData(smriti: 0, roshan: 0)
+
+    init(smriti: Int, roshan: Int) {
+        self.smriti = smriti
+        self.roshan = roshan
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case smriti, roshan
+        // Legacy keys from before the rename; read-only fallback.
+        case myCount, partnerCount
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        smriti = try container.decodeIfPresent(Int.self, forKey: .smriti)
+            ?? container.decodeIfPresent(Int.self, forKey: .myCount)
+            ?? 0
+        roshan = try container.decodeIfPresent(Int.self, forKey: .roshan)
+            ?? container.decodeIfPresent(Int.self, forKey: .partnerCount)
+            ?? 0
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(smriti, forKey: .smriti)
+        try container.encode(roshan, forKey: .roshan)
+    }
 }
 
 final class LocalCounterManager {
@@ -38,33 +65,33 @@ final class LocalCounterManager {
     }
 
     @discardableResult
-    func incrementMyCount() -> CounterData {
+    func incrementSmriti() -> CounterData {
         var current = data
-        current.myCount += 1
+        current.smriti += 1
         data = current
         return current
     }
 
     @discardableResult
-    func decrementMyCount() -> CounterData {
+    func decrementSmriti() -> CounterData {
         var current = data
-        current.myCount = max(0, current.myCount - 1)
+        current.smriti = max(0, current.smriti - 1)
         data = current
         return current
     }
 
     @discardableResult
-    func incrementPartnerCount() -> CounterData {
+    func incrementRoshan() -> CounterData {
         var current = data
-        current.partnerCount += 1
+        current.roshan += 1
         data = current
         return current
     }
 
     @discardableResult
-    func decrementPartnerCount() -> CounterData {
+    func decrementRoshan() -> CounterData {
         var current = data
-        current.partnerCount = max(0, current.partnerCount - 1)
+        current.roshan = max(0, current.roshan - 1)
         data = current
         return current
     }
