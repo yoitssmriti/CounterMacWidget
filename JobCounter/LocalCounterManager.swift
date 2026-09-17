@@ -35,7 +35,8 @@ struct CounterData: Codable, Equatable {
 }
 
 final class LocalCounterManager {
-    private static let storageKey = "counterData"
+    /// Also observed via KVO by FirestoreSyncService to catch widget-made changes.
+    static let storageKey = "counterData"
 
     private let defaults: UserDefaults?
 

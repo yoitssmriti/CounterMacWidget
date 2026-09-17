@@ -8,6 +8,10 @@ final class FirestoreSyncService {
 
     private let localManager: LocalCounterManager
     private var listener: ListenerRegistration?
+    private var defaultsObserver: DefaultsKeyObserver?
+    /// Last value received from (or mirrored into) the cloud, used to tell
+    /// widget-made local changes apart from our own cloud-snapshot writes.
+    private var lastCloudData: CounterData?
 
     private var competitionDocument: DocumentReference? {
         guard FirebaseApp.app() != nil else { return nil }
@@ -59,11 +63,42 @@ final class FirestoreSyncService {
         listener = competitionDocument.addSnapshotListener { [weak self] snapshot, error in
             self?.applyRemoteSnapshot(snapshot, error: error)
         }
+
+        startObservingLocalChanges()
     }
 
     func stopListening() {
         listener?.remove()
         listener = nil
+        defaultsObserver = nil
+    }
+
+    /// The widget can only write to the shared App Group (it has no Firebase),
+    /// so the app watches that storage and forwards widget-made changes to the
+    /// cloud. UserDefaults KVO fires across processes for shared suites.
+    private func startObservingLocalChanges() {
+        guard defaultsObserver == nil else { return }
+
+        defaultsObserver = DefaultsKeyObserver(
+            defaults: AppGroup.shared,
+            key: LocalCounterManager.storageKey
+        ) { [weak self] in
+            self?.handleLocalChange()
+        }
+    }
+
+    private func handleLocalChange() {
+        let current = localManager.data
+        guard current != lastCloudData else { return }
+
+        print("Local change detected (widget?): smriti=\(current.smriti) roshan=\(current.roshan) — pushing to cloud")
+        pushCountsToCloud(current)
+
+        NotificationCenter.default.post(
+            name: Self.didUpdateNotification,
+            object: self,
+            userInfo: ["counterData": current]
+        )
     }
 
     private func applyRemoteSnapshot(_ snapshot: DocumentSnapshot?, error: Error?) {
@@ -85,6 +120,10 @@ final class FirestoreSyncService {
         let updated = CounterData(smriti: smriti, roshan: roshan)
 
         print("Firestore snapshot: smriti=\(smriti) roshan=\(roshan)")
+
+        // Record the cloud value BEFORE the local write: KVO fires synchronously in
+        // this process, and handleLocalChange must not echo this write back to Firestore.
+        lastCloudData = updated
 
         // Always publish so the UI refreshes even when local already matched a failed earlier read.
         localManager.data = updated
@@ -113,5 +152,35 @@ final class FirestoreSyncService {
         default:
             return 0
         }
+    }
+}
+
+/// KVO wrapper for one UserDefaults key. For App Group suites the notification
+/// also fires when another process (the widget) changes the key.
+final class DefaultsKeyObserver: NSObject {
+    private let defaults: UserDefaults
+    private let key: String
+    private let onChange: () -> Void
+
+    init(defaults: UserDefaults, key: String, onChange: @escaping () -> Void) {
+        self.defaults = defaults
+        self.key = key
+        self.onChange = onChange
+        super.init()
+        defaults.addObserver(self, forKeyPath: key, options: [.new], context: nil)
+    }
+
+    deinit {
+        defaults.removeObserver(self, forKeyPath: key)
+    }
+
+    override func observeValue(
+        forKeyPath keyPath: String?,
+        of object: Any?,
+        change: [NSKeyValueChangeKey: Any]?,
+        context: UnsafeMutableRawPointer?
+    ) {
+        guard keyPath == key else { return }
+        onChange()
     }
 }

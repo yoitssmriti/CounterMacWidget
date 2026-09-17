@@ -1,7 +1,10 @@
 import Foundation
 
 enum AppGroup {
-    static let suiteName = "group.com.jobcounter.app"
+    /// Team-ID-prefixed, the required format for macOS app groups. Non-prefixed
+    /// ("group.*") IDs trigger a consent prompt that the widget process can never
+    /// show, so its reads/writes get silently denied.
+    static let suiteName = "M385RN2SR8.com.jobcounter.app"
 
     private static let resolved: (defaults: UserDefaults, usingAppGroup: Bool) = {
         if let suite = UserDefaults(suiteName: suiteName) {

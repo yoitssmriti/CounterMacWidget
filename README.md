@@ -26,7 +26,7 @@ Set up a shared database so application counts sync across both Macs in real tim
 2. Drag `GoogleService-Info.plist` into your Xcode project navigator (ensure it is checked for all targets).
 3. Under **Signing & Capabilities** for both **JobCounter** and **JobCounterWidget**:
    * Enable **Automatically manage signing** under your free Personal Team.
-   * Enable **App Groups** and check `group.com.jobcounter.app`.
+   * Enable **App Groups** and check `M385RN2SR8.com.jobcounter.app`.
    * Click **`+ Capability`**, search for **Hardened Runtime**, and add it to both targets.
 4. Set the run destination in the top toolbar to **My Mac** and press `⌘R` to build and verify local execution.
 5. Add it as you would any widget to your desktop.
